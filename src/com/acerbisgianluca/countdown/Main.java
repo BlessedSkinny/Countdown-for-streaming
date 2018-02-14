@@ -21,14 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package cronometro;
+package com.acerbisgianluca.countdown;
 
 import com.acerbisgianluca.filemanager.FileManager;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -274,7 +272,6 @@ public class Main extends javax.swing.JFrame {
             }, 3000);
         }    
         else {
-            lblCron.setText("00:00:00");
             isRunning = true;
             cron.scheduleAtFixedRate(new TimerTask() {
                 @Override
@@ -303,6 +300,7 @@ public class Main extends javax.swing.JFrame {
         cron = new Timer();
         isRunning = false;
         time = 0;
+        lblCron.setText("00:00:00");
     }//GEN-LAST:event_btnStopActionPerformed
 
     private void btnSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetActionPerformed
