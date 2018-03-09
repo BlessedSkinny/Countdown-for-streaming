@@ -50,6 +50,7 @@ public class Countdown extends Observable {
     private boolean save;
     private String endText;
     private boolean finished;
+    private long hours, minutes, seconds;
 
     public Countdown(JPanel panel, JLabel label, JTextField txt) {
         this.panel = panel;
@@ -78,10 +79,14 @@ public class Countdown extends Observable {
     }
     
     public void start(){
-        int hours = Integer.parseInt(sTimer.substring(0, 2));
-        int minutes = Integer.parseInt(sTimer.substring(3, 5));
-        int seconds = Integer.parseInt(sTimer.substring(6));
-        totalSecs = (hours * 3600) + (minutes * 60) + seconds;
+        int strHours = Integer.parseInt(sTimer.substring(0, 2));
+        int strMinutes = Integer.parseInt(sTimer.substring(3, 5));
+        int strSeconds = Integer.parseInt(sTimer.substring(6));
+        totalSecs = (strHours * 3600) + (strMinutes * 60) + strSeconds;
+        hours = totalSecs / 3600;
+        minutes = (totalSecs % 3600) / 60;
+        seconds = totalSecs % 60;
+
         String sTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
         label.setText(sTime);
 
@@ -91,12 +96,11 @@ public class Countdown extends Observable {
             public void run() {
                 if(totalSecs > 0) {
                     totalSecs--;
-                    long hours = totalSecs / 3600;
-                    long minutes = (totalSecs % 3600) / 60;
-                    long seconds = totalSecs % 60;
+                    hours = totalSecs / 3600;
+                    minutes = (totalSecs % 3600) / 60;
+                    seconds = totalSecs % 60;
 
                     String sTime = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-
                     label.setText(sTime);
                     
                     if(save){
